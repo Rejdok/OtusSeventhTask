@@ -7,18 +7,10 @@ before_script:
   - echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list
 
 script:
-  - doxygen ./Doxyfile
   - cmake .
   - cmake --build .
   - cmake --build . --target package
 deploy:
-  - provider: pages
-    skip_cleanup: true
-    github-token: $GITHUB_TOKEN  # 
-    keep-history: true
-    local-dir: DoxygenOutput/html/
-    on:
-      branch: master
   - provider: script
     skip_cleanup: true
     script:
